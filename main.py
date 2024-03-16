@@ -10,19 +10,20 @@ def main(page: ft.Page):
     page.window_title_bar_hidden = True
     page.padding = ft.padding.only(left=10)
 
-    page.scroll = ft.ScrollMode.ADAPTIVE
-
     page.fonts = {
         "Onest": "fonts/Onest.ttf"
     }
 
     # theming
-    page.theme_mode = ft.ThemeMode.LIGHT
+    page.theme_mode = ft.ThemeMode.DARK
     page.theme = ft.Theme(
         page_transitions=ft.PageTransitionsTheme(
-            windows=ft.PageTransitionTheme.CUPERTINO
+            windows=ft.PageTransitionTheme.FADE_UPWARDS
         ),
-        font_family="Onest"
+        font_family="Onest",
+        scrollbar_theme=ft.ScrollbarTheme(
+            radius=0
+        )
     )
 
 
