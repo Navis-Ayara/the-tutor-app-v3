@@ -1,5 +1,6 @@
 import flet as ft
 from pages.home import _home
+from pages.quiz import quiz_tab
 
 class Home(ft.View):
     def __init__(self, page: ft.Page):
@@ -7,7 +8,7 @@ class Home(ft.View):
 
         self.page = page
 
-        self.scroll = ft.ScrollMode.ADAPTIVE
+        self.scroll = ft.ScrollMode.HIDDEN
 
         self.padding = ft.padding.only(left=10)
 
@@ -27,6 +28,14 @@ class Home(ft.View):
                             color=ft.colors.OUTLINE_VARIANT
                         )
                     )
+                )
+            ]
+        )
+
+        self.drawer = ft.NavigationDrawer(
+            controls=[
+                ft.NavigationDrawerDestination(
+                    label="What's New?"
                 )
             ]
         )
@@ -146,14 +155,13 @@ class Home(ft.View):
                         value="Quiz",
                         size=20,
                         weight=ft.FontWeight.BOLD
-                    )
+                    ),
+                    center_title=True
                 )
 
                 self.controls.clear()
                 self.controls.append(
-                    ft.Text(
-                        value="Quizz"
-                    )
+                    quiz_tab(self.page)
                 )
 
             case 2:
@@ -191,3 +199,4 @@ class Home(ft.View):
                 )
         
         self.page.update()
+
