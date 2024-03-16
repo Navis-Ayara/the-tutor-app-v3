@@ -1,6 +1,9 @@
 import flet as ft
 
 def _home(page: ft.Page):
+    def go_to_chat(e):
+        page.go("/chat")
+
     return ft.Column([
         ft.Container(
             padding=10,
@@ -15,27 +18,23 @@ def _home(page: ft.Page):
                 width=200,
                 height=200,
                 border_radius=17,
-                bgcolor=ft.colors.SECONDARY_CONTAINER
+                bgcolor=ft.colors.SECONDARY_CONTAINER,
+                on_click=go_to_chat
             )
         for i in range(7)], scroll=ft.ScrollMode.ALWAYS),
         ft.Container(
             padding=10,
-            content=ft.Row([
-                ft.Text(
-                    value="Recent Sessions",
-                    size=18,
-                    weight=ft.FontWeight.W_600
-                ),
-                ft.TextButton(
-                    text="See More"
-                )
-            ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
+            content=ft.Text(
+                value="Recent Sessions",
+                size=18,
+                weight=ft.FontWeight.W_600
+            )
         ),
         ft.ListView([
             ft.Container(
                 height=50,
                 bgcolor=ft.colors.TERTIARY_CONTAINER,
-                border_radius=17,
+                border_radius=12,
                 padding=7,
                 content=ft.Column([
                     ft.Text(
