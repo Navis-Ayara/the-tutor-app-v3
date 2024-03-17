@@ -13,7 +13,7 @@ class ChatView(ft.View):
                 icon=ft.icons.ARROW_BACK_ROUNDED,
                 on_click=lambda _: page.go("/")
             ),
-            title=ft.Text("[subject]"),
+            title=ft.Text(f"{page.session.get("selected subject")}"),
             actions=[
                 ft.PopupMenuButton(
                     items=[
