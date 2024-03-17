@@ -154,7 +154,7 @@ class ChatView(ft.View):
                     items=[
                         ft.PopupMenuItem(
                             text="Save Session",
-                            on_click=self.save_session
+                            on_click=lambda _: self.save_session()
                         ),
                         ft.PopupMenuItem(
                             text="New session",
@@ -202,18 +202,23 @@ class ChatView(ft.View):
                 content=ft.Row([
                     ft.Text(
                         value="You:",
-                        weight=ft.FontWeight.BOLD
+                        weight=ft.FontWeight.BOLD,
                     ),
                     ft.Text(
                         user_message,
-                        weight=ft.FontWeight.BOLD
+                        weight=ft.FontWeight.BOLD,
+                        expand=True
                     ),
-                ])
+                ], vertical_alignment=ft.CrossAxisAlignment.START)
             )
         )
         self.page.update()
 
+        self.save_session()
+
         convo.send_message(user_message)
+
+        self.message_box.value = ""
 
         self.messages.controls.append(
             ft.Container(
@@ -226,6 +231,7 @@ class ChatView(ft.View):
                     ),
                     ft.Markdown(
                         value=convo.last.text,
+                        extension_set=ft.MarkdownExtensionSet.GITHUB_FLAVORED,
                         selectable=True,
                         auto_follow_links=True,
                         expand=True
@@ -238,10 +244,9 @@ class ChatView(ft.View):
 
         self.save_session()
 
-        self.message_box.value = ""
         self.page.update()
 
-    def save_session(self, e):
+    def save_session(self):
         if not self.session_id:
             self.session_id = str(uuid.uuid4())
             self.page.session.set("session_id", self.session_id)
