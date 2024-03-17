@@ -2,7 +2,21 @@ import flet as ft
 
 def _home(page: ft.Page):
     def go_to_chat(e):
+        page.session.set("selected subject", e.control.content.value)
         page.go("/chat")
+
+    subjects = [
+        "Mathematics",
+        "English",
+        "Kiswahili",
+        "Chemistry",
+        "Biology",
+        "Chemistry",
+        "Human Sciences",
+        "Computer Studies",
+        "French",
+        "Agriculture"
+    ]
 
     return ft.Column([
         ft.Container(
@@ -19,9 +33,13 @@ def _home(page: ft.Page):
                 height=200,
                 border_radius=17,
                 bgcolor=ft.colors.SECONDARY_CONTAINER,
-                on_click=go_to_chat
+                on_click=go_to_chat,
+                content=ft.Text(
+                    value=i
+                ),
+                alignment=ft.alignment.center
             )
-        for i in range(7)], scroll=ft.ScrollMode.ALWAYS),
+        for i in subjects], scroll=ft.ScrollMode.ALWAYS),
         ft.Container(
             padding=10,
             content=ft.Text(
@@ -31,22 +49,8 @@ def _home(page: ft.Page):
             )
         ),
         ft.ListView([
-            ft.Container(
-                height=50,
-                bgcolor=ft.colors.TERTIARY_CONTAINER,
-                border_radius=12,
-                padding=7,
-                content=ft.Column([
-                    ft.Text(
-                        value="Yesterday",
-                        size=15,
-                        weight=ft.FontWeight.W_600
-                    ),
-                    ft.Text(
-                        value="This is a history item",
-                        size=14
-                    )
-                ], spacing=0)
+            ft.Text(
+                value="Your history will appear here"
             )
-        for i in range(5)], spacing=10)
+        ], spacing=10)
     ])
