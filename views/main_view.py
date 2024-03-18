@@ -13,10 +13,12 @@ class Home(ft.View):
 
         self.appbar = ft.AppBar(
             elevation=10,
-            leading=ft.Container(
-                margin=ft.margin.only(left=10),
-                content=ft.CircleAvatar(bgcolor=ft.colors.BACKGROUND)
+            title=ft.Text(
+                value="Home",
+                size=20,
+                weight=ft.FontWeight.BOLD
             ),
+            center_title=True,
             actions=[
                 ft.Container(
                     margin=ft.margin.only(right=10),
@@ -114,10 +116,12 @@ class Home(ft.View):
             case 0:
                 self.appbar = ft.AppBar(
                     elevation=10,
-                    leading=ft.Container(
-                        margin=ft.margin.only(left=10),
-                        content=ft.CircleAvatar(bgcolor=ft.colors.BACKGROUND)
+                    title=ft.Text(
+                        value="Home",
+                        size=20,
+                        weight=ft.FontWeight.BOLD
                     ),
+                    center_title=True,
                     actions=[
                         ft.Container(
                             margin=ft.margin.only(right=10),
@@ -142,10 +146,6 @@ class Home(ft.View):
             case 2:
                 self.appbar = ft.AppBar(
                     elevation=10,
-                    leading=ft.Container(
-                        margin=ft.margin.only(left=10),
-                        content=ft.CircleAvatar(bgcolor=ft.colors.BACKGROUND)
-                    ),
                     title=ft.Text(
                         value="Settings",
                         size=20,
