@@ -1,6 +1,8 @@
 import flet as ft
 import os
 
+images = [f for f in os.listdir('assets/images')]
+
 def print_all_sessions():
     chat_history_files = [f for f in os.listdir('data/history') if f.startswith('chat_history_')]
     if not chat_history_files:
@@ -22,9 +24,10 @@ def _home(page: ft.Page):
         "Kiswahili",
         "Chemistry",
         "Biology",
-        "Chemistry",
-        "Human Sciences",
-        "Computer Studies",
+        "Physics",
+        "History",
+        "Geography",
+        "Computer",
         "French",
         "Agriculture"
     ]
@@ -33,7 +36,6 @@ def _home(page: ft.Page):
 
     def load_chat(e):
         page.session.set("session_id", e.control.content.value)
-
         page.go("/chat")
 
     chat_history_files = [f for f in os.listdir('data/history') if f.startswith('chat_history_')]
@@ -67,9 +69,11 @@ def _home(page: ft.Page):
                 border_radius=17,
                 bgcolor=ft.colors.SECONDARY_CONTAINER,
                 on_click=go_to_chat,
+                # image_src=images[i],
+                image_fit=ft.ImageFit.COVER,
                 content=ft.Text(
-                    value=i,
-                    size=16,
+                    value= i if i != "Mathematics"  else "",
+                    size=20,
                     weight=ft.FontWeight.W_500
                 ),
                 alignment=ft.alignment.center
