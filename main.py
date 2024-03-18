@@ -18,9 +18,15 @@ def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.DARK
     page.theme = ft.Theme(
         page_transitions=ft.PageTransitionsTheme(
-            windows=ft.PageTransitionTheme.FADE_UPWARDS
+            windows=ft.PageTransitionTheme.OPEN_UPWARDS
         ),
         font_family="Onest",
+        text_theme=ft.TextTheme(
+            label_medium=ft.TextStyle(
+                size=13,
+                weight=ft.FontWeight.BOLD
+            )
+        ),
         scrollbar_theme=ft.ScrollbarTheme(
             radius=0
         )
