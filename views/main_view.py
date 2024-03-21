@@ -1,5 +1,5 @@
 import flet as ft
-from pages.home import _home
+from pages.home import HomeView
 from pages.settings import settings
 
 class Home(ft.View):
@@ -18,28 +18,16 @@ class Home(ft.View):
                 size=20,
                 weight=ft.FontWeight.BOLD
             ),
-            center_title=True,
-            actions=[
-                ft.Container(
-                    margin=ft.margin.only(right=10),
-                    content=ft.IconButton(
-                        icon=ft.icons.MENU_ROUNDED,
-                        style=ft.ButtonStyle(
-                            side=ft.BorderSide(0.7, ft.colors.OUTLINE_VARIANT),
-                            color=ft.colors.OUTLINE_VARIANT
-                        )
-                    )
+            center_title=True
+        )
+
+        self.drawer = ft.NavigationDrawer(
+            controls=[
+                ft.NavigationDrawerDestination(
+                    label="What's New?"
                 )
             ]
         )
-
-        # self.drawer = ft.NavigationDrawer(
-        #     controls=[
-        #         ft.NavigationDrawerDestination(
-        #             label="What's New?"
-        #         )
-        #     ]
-        # )
 
         self.navigation_bar = ft.NavigationBar(
             on_change=self.navigate,
@@ -49,14 +37,14 @@ class Home(ft.View):
                     label="Home",
                     icon_content=ft.Container(
                         content=ft.Image(
-                            src="icons/Home.svg",
+                            src="/icons/Home.svg",
                             color=ft.colors.OUTLINE_VARIANT,
                             width=32
                         )
                     ),
                     selected_icon_content=ft.Container(
                         content=ft.Image(
-                            src="icons/Home.svg",
+                            src="/icons/Home.svg",
                             color=ft.colors.ON_BACKGROUND,
                             width=32
                         )
@@ -66,14 +54,14 @@ class Home(ft.View):
                     label="Quiz",
                     icon_content=ft.Container(
                         content=ft.Image(
-                            src="icons/Sun.svg",
+                            src="/icons/Sun.svg",
                             color=ft.colors.OUTLINE_VARIANT,
                             width=32
                         )
                     ),
                     selected_icon_content=ft.Container(
                         content=ft.Image(
-                            src="icons/Sun.svg",
+                            src="/icons/Sun.svg",
                             color=ft.colors.ON_BACKGROUND,
                             width=32
                         )
@@ -83,14 +71,14 @@ class Home(ft.View):
                     label="Settings",
                     icon_content=ft.Container(
                         content=ft.Image(
-                            src="icons/Settings.svg",
+                            src="/icons/Settings.svg",
                             color=ft.colors.OUTLINE_VARIANT,
                             width=32
                         )
                     ),
                     selected_icon_content=ft.Container(
                         content=ft.Image(
-                            src="icons/Settings.svg",
+                            src="/icons/Settings.svg",
                             color=ft.colors.ON_BACKGROUND,
                             width=32
                         )
@@ -99,7 +87,7 @@ class Home(ft.View):
             ]
         )
         self.controls = [
-            _home(self.page)
+            HomeView(self.page)
         ]
 
     
@@ -121,23 +109,11 @@ class Home(ft.View):
                         size=20,
                         weight=ft.FontWeight.BOLD
                     ),
-                    center_title=True,
-                    actions=[
-                        ft.Container(
-                            margin=ft.margin.only(right=10),
-                            content=ft.IconButton(
-                                icon=ft.icons.MENU_ROUNDED,
-                                style=ft.ButtonStyle(
-                                    side=ft.BorderSide(0.7, ft.colors.OUTLINE_VARIANT),
-                                    color=ft.colors.OUTLINE_VARIANT
-                                )
-                            )
-                        )
-                    ]
+                    center_title=True
                 )
 
                 self.controls.append(
-                    _home(self.page)
+                    HomeView(self.page)
                 )
 
             case 1:
