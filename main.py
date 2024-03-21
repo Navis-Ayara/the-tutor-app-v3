@@ -32,7 +32,6 @@ def main(page: ft.Page):
         )
     )
 
-
     def on_route_change(route):
         page.views.clear()
         page.views.append(
@@ -41,9 +40,15 @@ def main(page: ft.Page):
 
         page.update()
 
+    def view_pop(view):
+        page.views.pop()
+        top_view = page.views[-1]
+        page.go(top_view.route)
+
+    page.on_view_pop = view_pop
     page.on_route_change = on_route_change
 
     page.go("/")
 
-ft.app(target=main, use_color_emoji=True)
+ft.app(target=main, use_color_emoji=True, assets_dir="assets")
 
