@@ -169,42 +169,37 @@ class ChatView(ft.View):
                   },
                 ])
 
-                def send_query(self):
-                    user_message = self.message_box.value
-                    self.chat_history.append({"role": "user", "parts": [user_message]})
+                def send_query(self, e):
+                  user_message = self.message_box.value
+                  self.chat_history.append({"role": "user", "parts": [user_message]})
 
-                    self.messages.controls.append(
-                        ft.Container(
-                            padding=10,
-                            border_radius=10,
-                            bgcolor=ft.colors.SECONDARY_CONTAINER,
-                            content=ft.Text(
-                                value=self.message_box.value,
-                                size=14,
-                            )
-                        )
-                    )
-                    self.page.session.set("query", self.message_box.value)
-                    self.message_box.value = None
-                    self.page.update()
-                    convo.send_message(self.page.session.get("query"))
-                    self.messages.controls.append(
-                        ft.Container(
-                            padding=10,
-                            content=ft.Markdown(
-                                value=convo.last.text,
-                                extension_set=ft.MarkdownExtensionSet.GITHUB_FLAVORED
-                            )
-                        )
-                    )
-                    self.page.update()
-
-                    self.chat_history.append({"role": "model", "parts": [convo.last.text]})
-
-                    self.save_session()
-
-                self.send_btn.on_click = lambda _: send_query()
-                self.page.update()
+                  self.messages.controls.append(
+                      ft.Container(
+                          padding=10,
+                          border_radius=10,
+                          bgcolor=ft.colors.SECONDARY_CONTAINER,
+                          content=ft.Text(
+                              value=self.message_box.value,
+                              size=14,
+                          )
+                      )
+                  )
+                  self.page.session.set("query", self.message_box.value)
+                  self.message_box.value = None
+                  self.page.update()
+                  convo.send_message(self.page.session.get("query"))
+                  self.messages.controls.append(
+                      ft.Container(
+                          padding=10,
+                          content=ft.Markdown(
+                              value=convo.last.text,
+                              extension_set=ft.MarkdownExtensionSet.GITHUB_FLAVORED
+                          )
+                      )
+                  )
+                  self.page.update()
+                  self.chat_history.append({"role": "model", "parts": [convo.last.text]})
+                  self.save_session()
 
             case "English":
                 generation_config = {
@@ -1014,61 +1009,6 @@ class ChatView(ft.View):
         else:
             e.control.border_radius = 50
         self.page.update()
-
-    # def send(self, e):
-    #     user_message = self.message_box.value
-    #     self.chat_history.append({"role": "user", "parts": [user_message]})
-
-    #     self.messages.controls.append(
-    #         ft.Container(
-    #             expand=False,
-    #             padding=7,
-    #             content=ft.Row([
-    #                 ft.Text(
-    #                     value="You:",
-    #                     weight=ft.FontWeight.BOLD,
-    #                 ),
-    #                 ft.Text(
-    #                     user_message,
-    #                     weight=ft.FontWeight.BOLD,
-    #                     expand=True
-    #                 ),
-    #             ], vertical_alignment=ft.CrossAxisAlignment.START)
-    #         )
-    #     )
-    #     self.page.update()
-
-    #     self.save_session()
-
-    #     convo.send_message(user_message)
-
-    #     self.message_box.value = ""
-
-    #     self.messages.controls.append(
-    #         ft.Container(
-    #             expand=False,
-    #             padding=7,
-    #             content=ft.Row([
-    #                 ft.Text(
-    #                     value="Tutor:",
-    #                     weight=ft.FontWeight.BOLD
-    #                 ),
-    #                 ft.Markdown(
-    #                     value=convo.last.text,
-    #                     extension_set=ft.MarkdownExtensionSet.GITHUB_FLAVORED,
-    #                     selectable=True,
-    #                     auto_follow_links=True,
-    #                     expand=True
-    #                 )
-    #             ], vertical_alignment=ft.CrossAxisAlignment.START)
-    #         )
-    #     )
-
-    #     self.chat_history.append({"role": "model", "parts": [convo.last.text]})
-
-    #     self.save_session()
-
-    #     self.page.update()
 
     def save_session(self):
         if not self.session_id:
